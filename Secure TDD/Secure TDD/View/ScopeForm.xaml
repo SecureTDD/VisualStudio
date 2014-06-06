@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="Secure_TDD.View.ScopeForm"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             >
+    <Grid Background="#FFF3F3F3">
+        <Grid.Resources>
+            <HierarchicalDataTemplate x:Key="ChildTemplate" ItemsSource="{Binding Path=Children, Mode=TwoWay}" >
+                <StackPanel Orientation="Horizontal">
+                    <CheckBox Content="{Binding Path=Name, Mode=TwoWay}" IsChecked="{Binding IsSelected, Mode=TwoWay}" />
+                </StackPanel>
+            </HierarchicalDataTemplate>
+            <HierarchicalDataTemplate x:Key="NameTemplate" ItemsSource="{Binding Path=Children, Mode=TwoWay}" ItemTemplate="{StaticResource ChildTemplate}">
+                <StackPanel Orientation="Horizontal">
+                    <CheckBox Content="{Binding Path=Name, Mode=TwoWay}" IsChecked="{Binding IsSelected, Mode=TwoWay}" />
+                </StackPanel>
+            </HierarchicalDataTemplate>
+        </Grid.Resources>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <Label Content="Choose the scope of test generation:" Margin="5" FontSize="14"/>
+
+        <TreeView Margin="5" Grid.Row="1"
+                  ItemsSource="{Binding Tree, Mode=TwoWay}" ItemTemplate="{StaticResource NameTemplate}" />
+        
+    </Grid>
+</UserControl>

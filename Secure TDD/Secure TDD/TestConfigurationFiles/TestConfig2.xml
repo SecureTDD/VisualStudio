@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<SecureTDDEngineRule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="SQL Injection">
+  <Conditions>
+    <RuleCondition Key="PresentatinoLayer" Value="false" />
+    <RuleCondition Key="ContainsUserInput" Value="true" />
+    <RuleCondition Key="ContainsUserOutput" Value="false" />
+  </Conditions>
+  <AffectedParameters>
+    <RuleAffectedParameters Type="Class" Value="#ClassName#" />
+    <RuleAffectedParameters Type="ConstractorParam" Value="#CtorParam1#" />
+    <RuleAffectedParameters Type="Method" Value="#MethodName#" />
+    <RuleAffectedParameters Type="FirstParameters" Value="#FirstParameters#" />
+    <RuleAffectedParameters Type="SecondParameters" Value="#SecondParameters#" />
+    <RuleAffectedParameters Type="TestingParameterIndex" Value="#Index#" />
+  </AffectedParameters>
+  <TestCode>
+    <Code>string payload#Index# = @"'(((((";
+      #ClassName# myClass#Index# = new #ClassName#(#CtorParam1#);
+      myClass#Index#.#MethodName#(#FirstParameters#payload#Index##SecondParameters#);  // parameters build dynamically
+      Assert.IsTrue(true);</Code>
+  </TestCode>
+</SecureTDDEngineRule>

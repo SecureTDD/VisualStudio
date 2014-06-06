@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="Secure_TDD.View.MatchingForm"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:Secure_TDD.ViewModel"
+             >
+    <Grid Background="#FFF3F3F3">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Label Content="Select all relevant rules:" Margin="0 5 0 0" FontSize="14"/>
+        <Label Content="* Only input parameters of type 'System.String' can be selected."
+               Foreground="DarkRed" Margin="0 0 0 5" FontSize="14" Grid.Row="1"/>
+
+        <TreeView ItemsSource="{Binding AvailableMethods, Mode=TwoWay}"
+                  Margin="5" Grid.Row="2">
+            <TreeView.Resources>
+                <HierarchicalDataTemplate DataType="{x:Type vm:TestingMethodVM}" ItemsSource="{Binding Params, Mode=TwoWay}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding FullName}" FontWeight="Bold" Width="510" ToolTip="{Binding FullName}" />
+                        <!--<CheckBox IsChecked="{Binding IsDALChecked, Mode=TwoWay}" Content="DAL" />-->
+                        <RadioButton Content="DAL" IsChecked="{Binding IsDALChecked, Mode=TwoWay}" GroupName="{Binding FullName}" Margin="3 0" />
+                        <RadioButton Content="BL" IsChecked="{Binding IsBLChecked, Mode=TwoWay}" GroupName="{Binding FullName}" Margin="3 0" />
+                        <RadioButton Content="PL" IsChecked="{Binding IsPLChecked, Mode=TwoWay}" GroupName="{Binding FullName}" Margin="3 0" />
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+
+                <HierarchicalDataTemplate DataType="{x:Type vm:MethodParamsVM}" ItemsSource="{Binding IOParams, Mode=TwoWay}">
+                    <TextBlock Text="{Binding Name}" />
+                </HierarchicalDataTemplate>
+
+                <HierarchicalDataTemplate DataType="{x:Type vm:MethodIOParameterVM}">
+                    <CheckBox IsChecked="{Binding IsChecked, Mode=TwoWay}" IsEnabled="{Binding IsEnabled}">
+                        <TextBlock>
+                            <Run Text="{Binding ParameterName}"/>
+                            <Run Text=" ("/>
+                            <Run Text="{Binding IOTypeName}"/>
+                            <Run Text=")"/>
+                        </TextBlock>
+                    </CheckBox>
+                </HierarchicalDataTemplate>
+            </TreeView.Resources>
+        </TreeView>
+    </Grid>
+</UserControl>

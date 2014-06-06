@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SecureTDDEngineRule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="XSS Reflection">
+  <Conditions>
+    <RuleCondition Key="PresentatinoLayer" Value="false" />
+    <RuleCondition Key="ContainsUserInput" Value="false" />
+    <RuleCondition Key="ContainsUserOutput" Value="true" />
+  </Conditions>
+  <AffectedParameters>
+    <RuleAffectedParameters Name="MyName" Value="UserInput" />
+  </AffectedParameters>
+  <TestCode>
+    <Code>//SQL Injection Code Goes Here!</Code>
+  </TestCode>
+</SecureTDDEngineRule>

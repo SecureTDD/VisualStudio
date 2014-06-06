@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ConfigFilesPaths>
+  <FilePath>TestConfigurationFiles/TestConfigSample.xml</FilePath>
+  <FilePath>TestConfigurationFiles/TestConfig2.xml</FilePath>
+</ConfigFilesPaths>
